@@ -62,3 +62,6 @@ make
 cd ../rcwin
 mvn clean compile package site assembly:assembly
 
+cd
+sudo chown -R $(whoami) robocar-emulator/
+
