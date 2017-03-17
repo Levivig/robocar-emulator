@@ -9,8 +9,8 @@ apt-get install protobuf-compiler libprotobuf-dev -y
 apt-get install g++ -y
 apt-get install libboost-all-dev -y
 apt-get install flex -y
-apt-get install default-jdk
-apt-get install maven
+apt-get install default-jdk -y
+apt-get install maven -y
 apt-get install libexpat1-dev -y
 apt-get install zlib1g-dev -y
 apt-get install libbz2-dev -y
