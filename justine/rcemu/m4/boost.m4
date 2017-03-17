@@ -213,7 +213,7 @@ AC_LANG_POP([C++])dnl
 boost-lib-version = BOOST_LIB_VERSION],
     [boost_cv_lib_version=`cat conftest.i`])])
     # e.g. "134" for 1_34_1 or "135" for 1_35
-    boost_major_version=`dpkg-query -W --showformat='${Version}\n' libboost-dev | sed -E 's/^([^.]+)\.([^.]+)\..*/\1\2/‘`
+    boost_major_version=`dpkg-query -W --showformat='${Version}\n' libboost-dev | sed -E 's/^([^.]+)\.([^.]+)\..*/\1\2/'`
     case $boost_major_version in #(
       '' | *[[!0-9]]*)
         AC_MSG_ERROR([invalid value: boost_major_version=$boost_major_version])
