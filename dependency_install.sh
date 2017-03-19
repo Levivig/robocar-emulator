@@ -21,6 +21,8 @@ apt-get install libproj-dev -y
 apt-get install doxygen graphviz xmlstarlet -y
 apt-get install cmake -y
 
+sleep 1
+
 # libosmium
 mkdir libosmium
 cd libosmium/
@@ -31,6 +33,8 @@ make
 sudo make install
 cd .. 
 sudo cp libosmium/include/* /usr/local/include
+
+sleep 1
 
 cd ../..
 
