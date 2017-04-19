@@ -83,7 +83,7 @@ class Traffic
 {
 public:
 
-  Traffic ( int size, const char * shm_segment, double catchdist, TrafficType type = TrafficType::NORMAL, int minutes = 10, std::string valami )
+  Traffic ( int size, const char * shm_segment, double catchdist, TrafficType type = TrafficType::NORMAL, int minutes = 10, std::string valami ="asd" )
     :m_size ( size ), m_catchdist ( catchdist ), m_type ( type ), m_minutes ( minutes ) , m_valami(valami)
   {
 
