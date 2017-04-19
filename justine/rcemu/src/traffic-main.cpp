@@ -109,8 +109,6 @@ int main ( int argc, char* argv[] )
     traffict.assign ( "NORMAL" );
 
   int valami {42};
-  if ( vm.count ( "valami" ) )
-    valami = vm["valami"].as < int > ();
   
   justine::robocar::TrafficType type;
   if(traffict == "ANTS_RND")
