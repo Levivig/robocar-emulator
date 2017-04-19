@@ -85,7 +85,7 @@ int main ( int argc, char* argv[] )
 	
 	std::cout << "This SHM Client program has been modified by Levente Vig" << std::endl
 	<< "Copyright (C) 2014, 2015 Norbert Bátfai" << std::endl
-	<< "License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>" << std::endl
+	<< "License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>" << std::endl;
 
 	// Do not remove this copyright notice!
 	std::cout << "Robocar City Emulator and Robocar World Championship, Sample (My) SHM Client" << std::endl
