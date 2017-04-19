@@ -443,7 +443,7 @@ private:
   int m_size {10000};
   int m_time {0};
   int m_minutes {10};
-  std::string m_valami {"Valami!!"}
+  std::string m_valami {"Valami!!"};
   std::mutex m_mutex;
   std::condition_variable m_cv;
   std::thread m_thread {&Traffic::processes, this};
