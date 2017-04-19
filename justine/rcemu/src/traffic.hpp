@@ -83,7 +83,7 @@ class Traffic
 {
 public:
 
-  Traffic ( int size, const char * shm_segment, double catchdist, TrafficType type = TrafficType::NORMAL, int minutes = 10, std::string valami ="asd" )
+  Traffic ( int size, const char * shm_segment, double catchdist, TrafficType type = TrafficType::NORMAL, int minutes = 10, int valami = 42 )
     :m_size ( size ), m_catchdist ( catchdist ), m_type ( type ), m_minutes ( minutes ) , m_valami(valami)
   {
 
@@ -443,7 +443,7 @@ private:
   int m_size {10000};
   int m_time {0};
   int m_minutes {10};
-  std::string m_valami {"Valami!!"};
+  int m_valami {42};
   std::mutex m_mutex;
   std::condition_variable m_cv;
   std::thread m_thread {&Traffic::processes, this};
