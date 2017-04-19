@@ -62,6 +62,7 @@
 #include <memory>
 
 #include <carlexer.hpp>
+#include <string>
 
 #include <fstream>
 #include <boost/date_time/posix_time/posix_time.hpp>
@@ -82,9 +83,11 @@ class Traffic
 {
 public:
 
-  Traffic ( int size, const char * shm_segment, double catchdist, TrafficType type = TrafficType::NORMAL, int minutes = 10 )
-    :m_size ( size ), m_catchdist ( catchdist ), m_type ( type ), m_minutes ( minutes )
+  Traffic ( int size, const char * shm_segment, double catchdist, TrafficType type = TrafficType::NORMAL, int minutes = 10, std::string valami )
+    :m_size ( size ), m_catchdist ( catchdist ), m_type ( type ), m_minutes ( minutes ) , m_valami(valami)
   {
+
+    std::cout<< m_valami << "\n" << std::endl;
 
 #ifdef DEBUG
     std::cout << "Attaching shared memory segment called "
@@ -440,6 +443,7 @@ private:
   int m_size {10000};
   int m_time {0};
   int m_minutes {10};
+  std::string m_valami {"Valami!!"}
   std::mutex m_mutex;
   std::condition_variable m_cv;
   std::thread m_thread {&Traffic::processes, this};

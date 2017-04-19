@@ -53,6 +53,7 @@ int main ( int argc, char* argv[] )
   ( "minutes", boost::program_options::value<int>(), "how long does the traffic simulation run for?" )
   ( "catchdist", boost::program_options::value<double>(), "the catch distance of cop cars" )
   ( "traffict", boost::program_options::value< std::string > (), "traffic type = NORMAL|ANTS|ANTS_RND|ANTS_RERND|ANTS_MRERND" )
+  ("valami", boost::program_options::value< std::string > (), "Random ertek!" )
   ;
   
   boost::program_options::variables_map vm;
@@ -119,7 +120,7 @@ int main ( int argc, char* argv[] )
   else
     type = justine::robocar::TrafficType::NORMAL;
   
-  justine::robocar::Traffic traffic {nrcars, shm.c_str(), catchdist, type, minutes };
+  justine::robocar::Traffic traffic {nrcars, shm.c_str(), catchdist, type, minutes, valami };
 
   try
     {

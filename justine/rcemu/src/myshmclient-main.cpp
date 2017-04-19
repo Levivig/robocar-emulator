@@ -47,7 +47,8 @@ int main ( int argc, char* argv[] )
 	boost::program_options::store ( boost::program_options::parse_command_line ( argc, argv, desc ), vm );
 	boost::program_options::notify ( vm );
 
-	if ( vm.count ( "version" ) ) {
+	if ( vm.count ( "version" ) )
+	{
 		std::cout << "Robocar City Emulator and Robocar World Championship, Sample (My) SHM Client" << std::endl
 				<< "Copyright (C) 2014, 2015 Norbert Bátfai\n" << std::endl
 				<< "License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>" << std::endl
@@ -56,7 +57,8 @@ int main ( int argc, char* argv[] )
 		return 0;
 	}
 
-	if ( vm.count ( "help" ) ) {
+	if ( vm.count ( "help" ) )
+	{
 		std::cout << "Robocar City Emulator and Robocar World Championship home page: https://code.google.com/p/robocar-emulator/" << std::endl;
 		std::cout << desc << std::endl;
 		std::cout << "Please report bugs to: nbatfai@gmail.com" << std::endl;
@@ -77,9 +79,9 @@ int main ( int argc, char* argv[] )
 
 	std::string team;
 	if ( vm.count ( "team" ) )
-	  team.assign ( vm["team"].as < std::string > () );
+		team.assign ( vm["team"].as < std::string > () );
 	else
-	  team.assign ( "Norbi" );
+		team.assign ( "Norbi" );
 	
 	std::cout << "This SHM Client program has been modified by Levente Vig" << std::endl
 	<< "Copyright (C) 2014, 2015 Norbert Bátfai" << std::endl
@@ -94,11 +96,13 @@ int main ( int argc, char* argv[] )
 
 	justine::sampleclient::MyShmClient myShmClient {shm.c_str(), team };
 
-	try {
+	try
+	{
 		boost::asio::io_service io_service;
 		myShmClient.start10 ( io_service, port.c_str() );
 	  // myShmClient.start ( io_service, port.c_str() ); // 
-	} catch ( std::exception& e ) {
+	}
+	catch ( std::exception& e ) {
 		std::cerr << "Exception: " << e.what() << "\n";
 	}
 
