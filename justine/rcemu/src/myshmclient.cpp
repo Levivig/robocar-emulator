@@ -79,6 +79,7 @@ std::vector<justine::sampleclient::MyShmClient::Gangster> justine::sampleclient:
 	return gangsters;
 }
 
+
 std::vector<justine::sampleclient::MyShmClient::Cop> justine::sampleclient::MyShmClient::initcops ( boost::asio::ip::tcp::socket & socket )
 {
 	boost::system::error_code err;
