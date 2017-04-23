@@ -320,7 +320,7 @@ void justine::sampleclient::MyShmClient::start10 ( boost::asio::io_service& io_s
 			if ( gngstrs.size() > 0 )
 				g = gngstrs[0].to;
 			else if(thereWasAChase)
-				g = 2969934868u;
+				g = 486983066u;
 			else
 				g = 0;
 
@@ -333,6 +333,7 @@ void justine::sampleclient::MyShmClient::start10 ( boost::asio::io_service& io_s
 					std::copy ( path.begin(), path.end(), std::ostream_iterator<osmium::unsigned_object_id_type> ( std::cout, " -> " ) );
 
 					route ( socket, cop, path );
+
 					thereWasAChase = true;
 				}
 			}
