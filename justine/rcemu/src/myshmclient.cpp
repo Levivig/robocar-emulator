@@ -305,6 +305,8 @@ void justine::sampleclient::MyShmClient::start10 ( boost::asio::io_service& io_s
 
 	std::vector<Gangster> gngstrs;
 
+	bool thereWasAChase = false;
+
 	for ( ;; )
 	{
 		std::this_thread::sleep_for ( std::chrono::milliseconds ( 200 ) );
@@ -317,6 +319,8 @@ void justine::sampleclient::MyShmClient::start10 ( boost::asio::io_service& io_s
 
 			if ( gngstrs.size() > 0 )
 				g = gngstrs[0].to;
+			else if(thereWasAChase)
+				g = 2969934868u;
 			else
 				g = 0;
 
@@ -329,6 +333,7 @@ void justine::sampleclient::MyShmClient::start10 ( boost::asio::io_service& io_s
 					std::copy ( path.begin(), path.end(), std::ostream_iterator<osmium::unsigned_object_id_type> ( std::cout, " -> " ) );
 
 					route ( socket, cop, path );
+					thereWasAChase = true;
 				}
 			}
 		}
