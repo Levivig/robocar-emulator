@@ -305,7 +305,10 @@ void justine::sampleclient::MyShmClient::start10 ( boost::asio::io_service& io_s
 
 	std::vector<Gangster> gngstrs;
 
-	bool thereWasAChase = false;
+	unsigned int schoolNodes[] = {422987265, 1370021774, 1326539937, 343569186, 1337631544, 2936612672, 267389855, 1336963989, 2924567329,
+	4783201322};
+
+	int copCounter {0};
 
 	for ( ;; )
 	{
@@ -315,14 +318,15 @@ void justine::sampleclient::MyShmClient::start10 ( boost::asio::io_service& io_s
 		{
 			car ( socket, cop, &f, &t, &s );
 
-			gngstrs = gangsters ( socket, cop, t );
+			/*gngstrs = gangsters ( socket, cop, t );
 
 			if ( gngstrs.size() > 0 )
 				g = gngstrs[0].to;
-			else if(thereWasAChase)
-				g = 486983066u;
 			else
 				g = 0;
+			*/
+
+			g = schoolNodes[copCounter];
 
 			if ( g > 0 )
 			{
@@ -337,6 +341,8 @@ void justine::sampleclient::MyShmClient::start10 ( boost::asio::io_service& io_s
 					thereWasAChase = true;
 				}
 			}
+
+			++copCounter;
 		}
 	}
 }
