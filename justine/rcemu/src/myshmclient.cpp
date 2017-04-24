@@ -305,7 +305,7 @@ void justine::sampleclient::MyShmClient::start10 ( boost::asio::io_service& io_s
 
 	std::vector<Gangster> gngstrs;
 
-	unsigned long int schoolNodes[] = {422987265u, 1370021774u, 1326539937u, 343569186u, 1337631544u, 2936612672u, 267389855u, 1336963989u, 2924567329u, 4783201322u };
+	unsigned long int schoolNodes[] = {422987265u, 1370021774u, 1326539937u, 343569186u, 343569186u, 2936612672u, 267389855u, 1336963989u, 2924567329u, 4783201322u };
 
 	int copCounter {0};
 
