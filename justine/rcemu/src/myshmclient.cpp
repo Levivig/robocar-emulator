@@ -322,7 +322,7 @@ void justine::sampleclient::MyShmClient::start10 ( boost::asio::io_service& io_s
 			std::sort(schoolNodes.begin(), schoolNodes.end(), 
 			          [this, t] (unsigned long int x, unsigned long int y)
 					{
-						dest(x, t)<(dest(y,t));
+						return dst(x, t)<(dst(y,t));
 					}
 			);
 
