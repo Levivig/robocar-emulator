@@ -68,7 +68,6 @@ std::vector<justine::sampleclient::MyShmClient::Gangster> justine::sampleclient:
 		gangsters.push_back ( Gangster {idd, f, t, s} );
 	}
 
-	std::sort(gangsters.begin(), gangsters.end(), cmp)
 
 	std::sort ( gangsters.begin(), gangsters.end(), [this, cop] ( Gangster x, Gangster y )
 	{
