@@ -313,19 +313,16 @@ void justine::sampleclient::MyShmClient::start10 ( boost::asio::io_service& io_s
 
 	std::this_thread::sleep_for ( std::chrono::milliseconds ( 200 ) );
 
-	for(;;)
+	for ( auto cop:cops )
 	{
+		car ( socket, cop, &f, &t, &s );
 
-		for ( auto cop:cops )
-		{
-			car ( socket, cop, &f, &t, &s );
-
-			std::sort(schoolNodes.begin(), schoolNodes.end(), 
-			          [this, f] (unsigned long int x, unsigned long int y)
-					{
-						return dst(x, f)<(dst(y,f));
-					}
-			);
+		std::sort(schoolNodes.begin(), schoolNodes.end(), 
+		          [this, f] (unsigned long int x, unsigned long int y)
+				{
+					return dst(x, f)<(dst(y,f));
+				}
+		);
 
 /*
 			gngstrs = gangsters ( socket, cop, t );
@@ -336,23 +333,23 @@ void justine::sampleclient::MyShmClient::start10 ( boost::asio::io_service& io_s
 				g = 0;
 			*/			
 
-			g = schoolNodes[0];
+		g = schoolNodes[0];
 
-			if ( g > 0 )
+		if ( g > 0 )
+		{
+			std::vector<osmium::unsigned_object_id_type> path = hasDijkstraPath ( t, g );
+
+			if ( path.size() > 1 )
 			{
-				std::vector<osmium::unsigned_object_id_type> path = hasDijkstraPath ( t, g );
+				std::copy ( path.begin(), path.end(), std::ostream_iterator<osmium::unsigned_object_id_type> ( std::cout, " -> " ) );
 
-				if ( path.size() > 1 )
-				{
-					std::copy ( path.begin(), path.end(), std::ostream_iterator<osmium::unsigned_object_id_type> ( std::cout, " -> " ) );
-
-					route ( socket, cop, path );
-				}
+				route ( socket, cop, path );
 			}
-
-			if( !(schoolNodes.empty()) )
-				schoolNodes.erase(schoolNodes.begin() + 0);
-
 		}
+
+		if( !(schoolNodes.empty()) )
+			schoolNodes.erase(schoolNodes.begin() + 0);
+
 	}
 }
+
