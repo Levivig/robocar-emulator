@@ -320,9 +320,9 @@ void justine::sampleclient::MyShmClient::start10 ( boost::asio::io_service& io_s
 			car ( socket, cop, &f, &t, &s );
 
 			std::sort(schoolNodes.begin(), schoolNodes.end(), 
-			          [this, t] (unsigned long int x, unsigned long int y)
+			          [this, cop] (unsigned long int x, unsigned long int y)
 					{
-						return dst(x, t)<(dst(y,t));
+						return dst(x, cop)<(dst(y,cop));
 					}
 			);
 
