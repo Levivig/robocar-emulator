@@ -314,8 +314,6 @@ void justine::sampleclient::MyShmClient::start10 ( boost::asio::io_service& io_s
 
 		std::this_thread::sleep_for ( std::chrono::milliseconds ( 200 ) );
 
-		copCounter  = 0;
-
 		for ( auto cop:cops )
 		{
 			car ( socket, cop, &f, &t, &s );
@@ -350,6 +348,8 @@ void justine::sampleclient::MyShmClient::start10 ( boost::asio::io_service& io_s
 
 				}
 			}
+
+			schoolNodes.erase(schoolNodes.begin() + 0);
 
 			++copCounter;
 		}
