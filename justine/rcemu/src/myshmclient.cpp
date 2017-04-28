@@ -310,7 +310,7 @@ void justine::sampleclient::MyShmClient::start10 ( boost::asio::io_service& io_s
 
 	std::vector<unsigned long int> schoolNodes (Nodes, Nodes + sizeof(Nodes) / sizeof(Nodes[0] ));
 
-	int copCounter {0};
+//	int copCounter {0};
 
 		std::this_thread::sleep_for ( std::chrono::milliseconds ( 200 ) );
 
@@ -319,9 +319,9 @@ void justine::sampleclient::MyShmClient::start10 ( boost::asio::io_service& io_s
 			car ( socket, cop, &f, &t, &s );
 
 			std::sort(schoolNodes.begin(), schoolNodes.end(), 
-			          [this, t] (unsigned long int x, unsigned long int y)
+			          [this, f] (unsigned long int x, unsigned long int y)
 					{
-						return dst(x, t)<(dst(y,t));
+						return dst(x, f)<(dst(y,f));
 					}
 			);
 
@@ -334,7 +334,7 @@ void justine::sampleclient::MyShmClient::start10 ( boost::asio::io_service& io_s
 				g = 0;
 			*/			
 
-			g = schoolNodes[copCounter];
+			g = schoolNodes[0];
 
 			if ( g > 0 )
 			{
@@ -351,6 +351,6 @@ void justine::sampleclient::MyShmClient::start10 ( boost::asio::io_service& io_s
 
 			schoolNodes.erase(schoolNodes.begin() + 0);
 
-			++copCounter;
+//			++copCounter;
 		}
 	}
