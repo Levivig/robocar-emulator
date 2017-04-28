@@ -310,46 +310,49 @@ void justine::sampleclient::MyShmClient::start10 ( boost::asio::io_service& io_s
 	std::vector<unsigned long int> schoolNodes = 
 	{422987265u, 1370021774u, 1326539937u, 343569186u, 1337631544u, 2936612672u, 267389855u, 1336963989u, 2924567329u, 1492882533u };
 
+	int chaseNo {0};
 
 	std::this_thread::sleep_for ( std::chrono::milliseconds ( 200 ) );
 
-	for ( auto cop:cops )
+	for(;;)
 	{
-		car ( socket, cop, &f, &t, &s );
 
-		std::sort(schoolNodes.begin(), schoolNodes.end(), 
-		          [this, f] (unsigned long int x, unsigned long int y)
-				{
-					return dst(x, f)<(dst(y,f));
-				}
-		);
+		for ( auto cop:cops )
+		{
+			car ( socket, cop, &f, &t, &s );
 
-/*
+			std::sort(schoolNodes.begin(), schoolNodes.end(), 
+			          [this, f] (unsigned long int x, unsigned long int y)
+					{
+						return dst(x, f)<(dst(y,f));
+					}
+			);
+
 			gngstrs = gangsters ( socket, cop, t );
 
-			if ( gngstrs.size() > 0 )
+			if(chaseNo > 5)
+				g = schoolNodes[0];
+			else if ( gngstrs.size() > 0 )
 				g = gngstrs[0].to;
 			else
 				g = 0;
-			*/			
 
-		g = schoolNodes[0];
-
-		if ( g > 0 )
-		{
-			std::vector<osmium::unsigned_object_id_type> path = hasDijkstraPath ( t, g );
-
-			if ( path.size() > 1 )
+			if ( g > 0 )
 			{
-				std::copy ( path.begin(), path.end(), std::ostream_iterator<osmium::unsigned_object_id_type> ( std::cout, " -> " ) );
+				std::vector<osmium::unsigned_object_id_type> path = hasDijkstraPath ( t, g );
 
-				route ( socket, cop, path );
+				if ( path.size() > 1 )
+				{
+					std::copy ( path.begin(), path.end(), std::ostream_iterator<osmium::unsigned_object_id_type> ( std::cout, " -> " ) );
 
+					route ( socket, cop, path );
+				}
+				++chaseNo;
 			}
+
+			if( !(schoolNodes.empty()) )
+				schoolNodes.erase(schoolNodes.begin() + 0);
+
 		}
-
-		if( !(schoolNodes.empty()) )
-			schoolNodes.erase(schoolNodes.begin() + 0);
-
 	}
 }
