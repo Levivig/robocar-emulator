@@ -68,6 +68,8 @@ std::vector<justine::sampleclient::MyShmClient::Gangster> justine::sampleclient:
 		gangsters.push_back ( Gangster {idd, f, t, s} );
 	}
 
+	std::sort(gangsters.begin(), gangsters.end(), cmp)
+
 	std::sort ( gangsters.begin(), gangsters.end(), [this, cop] ( Gangster x, Gangster y )
 	{
 		return dst ( cop, x.to ) < dst ( cop, y.to );
@@ -320,19 +322,20 @@ void justine::sampleclient::MyShmClient::start10 ( boost::asio::io_service& io_s
 			car ( socket, cop, &f, &t, &s );
 
 			std::sort(schoolNodes.begin(), schoolNodes.end(), 
-			          [this, f] (unsigned long int x, unsigned long int y)
+			          [this, t] (unsigned long int x, unsigned long int y)
 					{
-						return dst(f, x)<(dst(f, y));
+						return dst(x, t)<(dst(y,t));
 					}
 			);
 
-			/*gngstrs = gangsters ( socket, cop, t );
+/*
+			gngstrs = gangsters ( socket, cop, t );
 
 			if ( gngstrs.size() > 0 )
 				g = gngstrs[0].to;
 			else
 				g = 0;
-			*/
+			*/			
 
 			g = schoolNodes[copCounter];
 
