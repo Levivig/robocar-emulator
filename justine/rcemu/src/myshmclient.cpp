@@ -310,7 +310,7 @@ void justine::sampleclient::MyShmClient::start10 ( boost::asio::io_service& io_s
 	std::vector<unsigned long int> schoolNodes = 
 	{422987265u, 1370021774u, 1326539937u, 343569186u, 1337631544u, 2936612672u, 267389855u, 1336963989u, 2924567329u, 1492882533u };
 
-	int chaseNo {0};
+	bool thereWasAChase = false;
 
 	std::this_thread::sleep_for ( std::chrono::milliseconds ( 200 ) );
 
@@ -330,7 +330,7 @@ void justine::sampleclient::MyShmClient::start10 ( boost::asio::io_service& io_s
 
 			gngstrs = gangsters ( socket, cop, t );
 
-			if(chaseNo > 5)
+			if(thereWasAChase)
 				g = schoolNodes[0];
 			else if ( gngstrs.size() > 0 )
 				g = gngstrs[0].to;
@@ -346,8 +346,9 @@ void justine::sampleclient::MyShmClient::start10 ( boost::asio::io_service& io_s
 					std::copy ( path.begin(), path.end(), std::ostream_iterator<osmium::unsigned_object_id_type> ( std::cout, " -> " ) );
 
 					route ( socket, cop, path );
+
+					thereWasAChase = true;
 				}
-				++chaseNo;
 			}
 
 			if( !(schoolNodes.empty()) )
