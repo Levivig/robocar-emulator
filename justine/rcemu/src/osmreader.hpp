@@ -291,7 +291,7 @@ public:
 
 								double edge_length = distance ( vertex_old, vertex );
 
-								palist[vertex_old].push_back ( edge_length / (speed / 3.6) );
+								palist[vertex_old].push_back ( edge_length / (0.2*(speed / 3.6)) );
 
 								if ( edge_length>max_edge_length )
 									max_edge_length = edge_length;
