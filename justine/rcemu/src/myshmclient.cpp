@@ -37,6 +37,8 @@ char data[524288];
 std::vector<justine::sampleclient::MyShmClient::Gangster> justine::sampleclient::MyShmClient::gangsters ( boost::asio::ip::tcp::socket & socket, int id,
 	osmium::unsigned_object_id_type cop )
 {
+	rendor = cop;
+
 	boost::system::error_code err;
 
 	size_t length = std::sprintf ( data, "<gangsters " );
@@ -68,13 +70,7 @@ std::vector<justine::sampleclient::MyShmClient::Gangster> justine::sampleclient:
 		gangsters.push_back ( Gangster {idd, f, t, s} );
 	}
 
-
-	std::sort ( gangsters.begin(), gangsters.end(),
-	           [this, cop] ( Gangster x, Gangster y )
-		{
-			return dst ( cop, x.to ) < dst ( cop, y.to );
-		} 
-	);
+	std::sort ( gangsters.begin(), gangsters.end(), Compare(*this));
 
 	std::cout.write ( data, length );
 	std::cout << "Command GANGSTER sent." << std::endl;
@@ -312,9 +308,9 @@ void justine::sampleclient::MyShmClient::start10 ( boost::asio::io_service& io_s
 
 	std::this_thread::sleep_for ( std::chrono::milliseconds ( 200 ) );
 
-	for ( auto cop:cops )
+	for ( std::vector<Cop>::iterator it = cops.begin(); it != cops.end(); ++it)
 	{
-		car ( socket, cop, &f, &t, &s );
+		car ( socket, *it, &f, &t, &s );
 
 		std::sort(schoolNodes.begin(), schoolNodes.end(), 
 		          [this, f] (unsigned long int x, unsigned long int y)
@@ -323,12 +319,13 @@ void justine::sampleclient::MyShmClient::start10 ( boost::asio::io_service& io_s
 				}
 		);
 
-		/*
-			gngstrs = gangsters ( socket, cop, t );
+		/*	 
+			gngstrs = gangsters ( socket, *it, t );
 
 			if ( gngstrs.size() > 0 )
 				g = gngstrs[0].to;
 			else
+			
 				g = 0;
 		*/			
 
@@ -342,7 +339,7 @@ void justine::sampleclient::MyShmClient::start10 ( boost::asio::io_service& io_s
 			{
 				std::copy ( path.begin(), path.end(), std::ostream_iterator<osmium::unsigned_object_id_type> ( std::cout, " -> " ) );
 
-				route ( socket, cop, path );
+				route ( socket, *it, path );
 			}
 		}
 

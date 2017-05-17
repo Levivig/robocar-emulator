@@ -515,6 +515,27 @@ struct SmartCar
 typedef SmartCar Gangster;
 typedef int Cop;
 
+bool cmp(Gangster &x, Gangster &y)
+{
+	return dst ( cop, x.to ) < dst ( cop, y.to );
+}
+
+Cop rendor;
+
+struct
+{
+	Compare(const &MyShmClient Kliens)
+	{
+		mKliens = Kliens;
+	}
+
+	MyShmClient mKliens;
+	bool operator()(Gangster x, Gangster y) const
+	{   
+        		return mKliens.dst ( mKliens.rendor, x.to ) < mKliens.dst ( mKliens.rendor, y.to );
+	}   
+} Compare;
+
 std::vector<Gangster> gangsters ( boost::asio::ip::tcp::socket & socket, int id, osmium::unsigned_object_id_type cop );
 std::vector<Cop> initcops ( boost::asio::ip::tcp::socket & socket );
 void pos ( boost::asio::ip::tcp::socket & socket, int id );

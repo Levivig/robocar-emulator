@@ -108,7 +108,7 @@ int main ( int argc, char* argv[] )
   else
     traffict.assign ( "NORMAL" );
 
-  int valami {42};
+  int valami;
     if ( vm.count ( "valami" ) )
     valami = vm["valami"].as < int > ();
   
