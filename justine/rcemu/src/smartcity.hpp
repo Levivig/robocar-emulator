@@ -301,19 +301,22 @@ public:
             << iter->second.m_alist.size()
             << " ";
 
-        for ( auto noderef : iter->second.m_alist )
+        //for ( auto noderef : iter->second.m_alist )
+        for(justine::robocar::uint_vector::iterator it1 = iter->second.m_alist.begin(); it1 != iter->second.m_alist.end(); it1++)
           std::cout
-              << noderef
+              << *it1
               << " ";
 
-        for ( auto noderef : iter->second.m_salist )
+        //for ( auto noderef : iter->second.m_salist )
+         for(justine::robocar::uint_vector::iterator it2 = iter->second.m_alist.begin(); it2 != iter->second.m_alist.end(); it2++)
           std::cout
-              << noderef
+              << *it2
               << " ";
 
-        for ( auto noderef : iter->second.m_palist )
+        //for ( auto noderef : iter->second.m_palist )
+         for(justine::robocar::uint_vector::iterator it3 = iter->second.m_alist.begin(); it3 != iter->second.m_alist.end(); it3++)
           std::cout
-              << noderef
+              << *it3
               << " ";
 
         std::cout << std::endl;
