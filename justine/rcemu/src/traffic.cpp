@@ -133,11 +133,12 @@ void justine::robocar::Traffic::cmd_session ( boost::asio::ip::tcp::socket clien
                      cars_copy.size()
                      << std::endl;
 
-                  for ( auto car:cars_copy )
+                  //for ( auto car:cars_copy )
+                  for(std::vector<std::shared_ptr<Car>>::iterator it = cars_copy.begin(); it != cars_copy.end(); it++)
                     {
-                      car->step();
+                      (*(*it)).step();
 
-                      ss << *car
+                      ss << (*(*it))
                          <<  " " << std::endl;
 
                     }
