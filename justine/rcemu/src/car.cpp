@@ -156,8 +156,11 @@ osmium::unsigned_object_id_type justine::robocar::AntCar::ant_rernd ( void )
 
   int total = sum + cpv.size() * ( res/cpv.size() );
 
-  for ( osmium::unsigned_object_id_type& v : cpv )
-    v += res/cpv.size();
+  //for ( osmium::unsigned_object_id_type& v : cpv )
+    //v += res/cpv.size();
+
+  for(WayNodesVect::iterator it = cpv.begin(); it != cpv.end(); it++)
+    (*it) += res/cpv.size();
 
   int rnd = std::rand() % total;
 
