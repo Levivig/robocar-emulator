@@ -266,9 +266,10 @@ public:
 		osmium::unsigned_object_id_type vertex_old;
 
 		for ( const osmium::NodeRef& nr : way.nodes() )
+		for(osmium::WaynodeList::iterator it = (way.nodes()).begin(); it != (way.nodes()).end(); it++)
 			{
 
-				osmium::unsigned_object_id_type vertex = nr.positive_ref();
+				osmium::unsigned_object_id_type vertex = it->positive_ref();
 
 				way2nodes[way.id()].push_back ( vertex );
 
@@ -286,7 +287,7 @@ public:
 						++unique_node_counter;
 
 						//waynode_locations.set ( vertex, nr.location() );
-						waynode_locations[vertex] = nr.location();
+						waynode_locations[vertex] = it->location();
 
 					}
 
