@@ -62,15 +62,22 @@ namespace robocar
 typedef osmium::index::map::SparseMemMap<osmium::unsigned_object_id_type, osmium::Location> OSMLocations;
 
 typedef std::vector<osmium::unsigned_object_id_type> WayNodesVect;
+
+typedef std::vector<double> ProbabilityVect;
+typedef std::pair<WayNodesVect, ProbabilityVect> WayNodesProbability;
+
 typedef std::map<std::string, WayNodesVect> WayNodesMap;
 //typedef osmium::index::map::StlMap<osmium::unsigned_object_id_type, osmium::Location> WaynodeLocations;
 typedef std::map<osmium::unsigned_object_id_type, osmium::Location> WaynodeLocations;
 typedef std::map<osmium::unsigned_object_id_type, WayNodesVect> Way2Nodes;
 
-typedef std::map<osmium::unsigned_object_id_type, WayNodesVect> AdjacencyList;
+//typedef std::map<osmium::unsigned_object_id_type, WayNodesVect> AdjacencyList;
+typedef std::map<osmium::unsigned_object_id_type, WayNodesProbability> AdjacencyList;
 typedef osmium::index::map::SparseMemMap<osmium::unsigned_object_id_type, int > Vertices;
 
 typedef std::map<osmium::unsigned_object_id_type, std::string> WayNames;
+
+//typedef valami s
 
 class OSMReader : public osmium::handler::Handler
 {
@@ -136,17 +143,18 @@ public:
 				std::map<osmium::unsigned_object_id_type, size_t>	word_map;
 				int sum_edges {0};
 				std::map <int, int> node_degrees;
-				for ( auto busit = begin ( alist );
-							busit != end ( alist ); ++busit )
+				//for ( auto busit = begin ( alist ); busit != end ( alist ); ++busit )
+				for(AdjacencyList::iterator it = alist.begin(); it != alist.end(); it++)
 					{
 
-						sum_vertices.insert ( busit->first );
-						sum_edges+=busit->second.size();
-						node_degrees[busit->second.size()]++;
+						sum_vertices.insert ( it->first );
+						sum_edges+=it->second.size();
+						node_degrees[it->second.size()]++;
 
-						for ( const auto &v : busit->second )
+						//for ( const auto &v : busit->second )
+						for(AdjacencyList::iterator itr = it->second.begin(); it != it->second.end(); itr++)
 							{
-								sum_vertices.insert ( v );
+								sum_vertices.insert ( *itr );
 							}
 
 					}
@@ -156,7 +164,8 @@ public:
 				std::cout << " #onewayc = "<< onewayc << std::endl;
 				std::cout << " #distribution of out degrees:" << std::endl;
 				std::cout << " #";
-				for ( const auto &i : node_degrees )
+				//for ( const auto &i : node_degrees )
+				for(std::map<int, int>::iterator it = node_degrees.begin(); it != node_degrees.end(); it++)
 					std::cout << "deg-=" << i.first << ":" << i.second << ", ";
 				std::cout << std::endl;
 				std::cout << " #mean of out degrees:" << ( double ) sum_edges / ( double ) alist.size() << std::endl;
