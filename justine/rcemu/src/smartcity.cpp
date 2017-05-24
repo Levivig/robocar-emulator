@@ -42,29 +42,32 @@ double justine::robocar::SmartCity::busWayLength ( bool verbose )
 {
 
   double sum_bus_length {0.0};
-  for ( auto busit = begin ( m_busWayNodesMap );
-        busit != end ( m_busWayNodesMap ); ++busit )
+  //for ( auto busit = begin ( m_busWayNodesMap );
+        //busit != end ( m_busWayNodesMap ); ++busit )
+  for(WayNodesMap::iterator it = m_busWayNodesMap.begin(); it != m_busWayNodesMap.end(); it++)
     {
 
       if ( verbose )
-        std::cout << busit->first << ": ";
+        std::cout << it->first << ": ";
 
       double bus_length {sum_bus_length};
-      for ( auto ref : busit->second )
+      //for ( auto ref : busit->second )
+      for(WayNodesVect::iterator it1 = it->second.begin(); it1 != it->second.end(); it1++)
         {
 
           int i {1};
 
           osmium::Location prev_loc;
-          for ( auto node_ref : m_way2nodes[ref] )
+          //for ( auto node_ref : m_way2nodes[ref] )
+          for(WayNodesVect::iterator it 2 = m_way2nodes[*it1].begin(); it2 != m_way2nodes[*it1].end(); it2++)
             {
 
               try
                 {
 
                   //osmium::Location loc = m_waynode_locations.get ( node_ref );
-		  osmium::Location loc = m_waynode_locations[node_ref];
-		  
+		  //osmium::Location loc = m_waynode_locations[node_ref];
+		  osmium::Location loc = m_waynode_locations[*it1];
                   if ( verbose )
                     std::cout << loc << std::endl;
 
