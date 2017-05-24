@@ -1,3 +1,4 @@
+
 #ifndef ROBOCAR_SMARTCITY_HPP
 #define ROBOCAR_SMARTCITY_HPP
 
@@ -57,7 +58,10 @@ typedef boost::interprocess::managed_shared_memory::segment_manager segment_mana
 typedef boost::interprocess::allocator<void, segment_manager_Type> void_allocator;
 typedef boost::interprocess::allocator<unsigned int, segment_manager_Type> uint_allocator;
 typedef boost::interprocess::vector<unsigned int, uint_allocator> uint_vector;
+typedef boost::interprocess::allocator<double, segment_manager_Type> double_allocator;
+typedef boost::interprocess::vector<double, double_allocator> double_vector;
 typedef boost::interprocess::allocator<uint_vector, segment_manager_Type> uint_vector_allocator;
+
 
 class SharedData
 {
@@ -66,6 +70,8 @@ public:
   uint_vector m_alist;
   uint_vector m_salist;
   uint_vector m_palist;
+
+  double_vector m_problist;
 
   int lon;
   int lat;
@@ -89,15 +95,16 @@ public:
 
     std::fstream gpsFile ( map_file, std::ios_base::out );
 
-    for ( auto loc: m_waynode_locations )
+    //for ( auto loc: m_waynode_locations )
+    for(WaynodeLocations::iterator it = m_waynode_locations.begin(); it !=m_waynode_locations.end(); it++)
       {
-        gpsFile << loc.first
-                << " " << loc.second.lat()
-                << " " << loc.second.lon();
+        gpsFile << it->first
+                << " " << it->second.lat()
+                << " " << it->second.lon();
 
         if ( mode )
           gpsFile <<
-                  " " << node2way ( loc.first );
+                  " " << node2way ( it->first );
 
         gpsFile << std::endl;
       }
