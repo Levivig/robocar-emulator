@@ -255,14 +255,15 @@ public:
   std::string node2way ( osmium::unsigned_object_id_type node )
   {
 
-    for ( auto wayit = begin ( m_way2nodes );
-          wayit != end ( m_way2nodes ); ++wayit )
+    //for ( auto wayit = begin ( m_way2nodes );
+      //    wayit != end ( m_way2nodes ); ++wayit )
+    for(Way2Nodes::iterator itr = m_way2nodes.begin(); itr != m_way2nodes.end(); itr++)
       {
 
         WayNodesVect::iterator it = std::find ( wayit->second.begin(), wayit->second.end(), node );
 
-        if ( it != wayit->second.end() )
-          return m_way2name[wayit->first];
+        if ( it != itr->second.end() )
+          return m_way2name[itr->first];
 
       }
 
