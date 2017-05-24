@@ -206,8 +206,11 @@ void justine::sampleclient::MyShmClient::route (boost::asio::ip::tcp::socket & s
 
 	size_t length = std::sprintf ( data,"<route %d %d", path.size(), id );
 
-	for ( auto ui: path )
-		length += std::sprintf ( data+length, " %u", ui );
+	//for ( auto ui: path )
+	//	length += std::sprintf ( data+length, " %u", ui );
+
+	for(std::vector<osmium::unsigned_object_id_type>::iterator it = path.begin(); it != path.end(); it++)
+		length += std::sprintf(data+length, " %u", *it);
 
 	length += std::sprintf ( data+length, ">" );
 
