@@ -383,13 +383,14 @@ public:
 					}
 
 				osmium::RelationMemberList& rml = rel.members();
-				for ( osmium::RelationMember& rm : rml )
+				//for ( osmium::RelationMember& rm : rml )
+				for(osmium::RelationMemberList::iterator it = rml.begin(); it != rml.end(); it++)
 					{
 
-						if ( rm.type() == osmium::item_type::way )
+						if ( it->type() == osmium::item_type::way )
 							{
 
-								busWayNodesMap[ref_key].push_back ( rm.ref() );
+								busWayNodesMap[ref_key].push_back ( it->ref() );
 
 							}
 					}
